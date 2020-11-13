@@ -61,13 +61,15 @@ Throughout this document, you will come across these notations:
 
 * **Keyboard Keys**: Words that are wrapped in a box like <kbd>this</kbd> points to a corresponding key on your keyboard.
 
+* **Terminology**: Momentum tracks both projects and tasks. In this document, we will refer to both projects and tasks as items. 
+
 
 ### Command Format
 
 You will be presented with multiple commands throughout this document. You may find the description of the command format below.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Blog Design`.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user. Parameters are preceded by prefixes. The prefixes represent what the parameters will be used for in the command.
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Blog Design`, whereas the `n/` signifies that the parameter is being used in the name.
 
 * Items in square brackets are optional.
   e.g `n/NAME [t/TAG]` can be used as `n/Blog Design t/friend` or as `n/Blog Design`.
@@ -165,7 +167,7 @@ You may also have to enter both dates and times together. When entered together,
 
    * `list` : List all projects or tasks based on the current view mode.
 
-   * `sort type/deadline order/asc` : Sort the list of projects/tasks by deadline in ascending order.
+   * `sort type/deadline order/asc` : Sort the list of items by deadline in ascending order.
 
    * `start 1` : Start the timer of project/task at index 1.
 
@@ -460,24 +462,429 @@ Deletes a project or task in the list.
 Format: `delete ID`
 
 * Deletes the project or task at the specified `ID`.
-* You can refer to [`ID` Term](#id-term) for more information.
+* You can refer to [Index Term](#index-term) for more information.
 
 Example: `delete 2`
 
 Result: Deletes the second project or task in the list.
 
-##### Walkthrough of deleting a project
+The following walkthrough shows how you can delete a task in Momentum.
+
 Suppose you would like to delete the first project in the list
 
 ![Delete1](images/Delete1.png)
 
-1. Type `delete 1` into the command box and press <kbd>Enter</kbd>
+1. Type `delete 1` into the command box and press <kbd>Enter</kbd>.
 
     ![Delete2](images/Delete2.png)
     
 2. The results box will display a message to indicate that the project has been successfully deleted. You should no long see the project in the displayed list.
 
     ![Delete3](images/Delete3.png)
+
+#### Sort Projects : `sort`
+
+Done by Kang Su Min
+
+This command allows you to sort the list of displayed items in a particular sort type and order.
+
+Format: `sort [type/SORT_TYPE] [order/SORT_ORDER] [c/]`
+
+* There are 3 sort types.
+
+  * `type/alpha` will sort the list of items in alphabetical order.
+  
+  * `type/deadline` will sort the list of items according to their deadlines.
+
+  * `type/created` will sort the list of items according to their date of creation.
+
+
+* There are 2 sort orders.
+
+  * `order/asc` will sort the list of items in ascending order.
+
+  * `order/dsc` will sort the list of items in descending order.
+
+In addition to the above sort types and orders, the list can be sorted by completion status.
+
+* This is the "dominant sort" that will ensure that all incomplete projects/tasks are above complete items, before sorting the items in the specified sort type and order above.
+
+* The default sort order will sort the items by completion status.
+
+* `sort c/` will toggle the default completion status sort.
+
+    * Once the completion status sort is off, the items will be sorted in the specified sort type and order without regard for their completion status.
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: Here are some things you should take note of
+* When the application first starts, the completion status order is turned on. This completion status sort status (on/off) is maintained until it is toggled.
+
+* `type/alpha` and `order/asc` will be used as default if both sort type and order are not specified. For example, when the command is `sort`.
+
+* For both `sort type/deadline` and `sort type/created`, projects with the same deadline or same created date will be sorted in alphabetical order.
+
+* For `sort type/deadline`, items with deadlines will appear at the top of the list sorted in deadline order, while those without deadlines will be pushed to the end of the list sorted in alphabetical order.
+
+</div>
+
+**Sorting by Default Order**
+
+Format: `sort`
+
+This sorts items in default ascending alphabetical order.
+
+The following walkthrough shows how you can sort projects in Momentum by the default order.
+
+1. Key in command `sort` in the command window and press <kbd>Enter</kbd>.
+
+  ![Default Sort Step 1](images/DefaultSort1.png)
+
+2. The result box will display a message to indicate that the command has been executed successfully.
+
+  ![Default Sort Step 2](images/DefaultSort2.png)
+
+3. All projects are ordered in default ascending alphabetical order with incomplete tasks showing up at the top of the list (Completion status sort is on).
+
+  ![Default Sort Step 3](images/DefaultSort3.png)
+
+##### Sorting With Completion Status Toggle
+
+Format: `sort c/`
+
+This toggles the completion status order. For example, if the completion status order is `on`, the completion status order is turned `off`, vice versa.
+
+The following walkthrough shows how you can toggle the completion status order in Momentum.
+
+1. Key in command `sort c/` in the command window and press <kbd>Enter</kbd>.
+
+  ![Toggle Completion Status Step 1](images/ToggleCompletionStatus1.png)
+
+  Note that currently all projects at the top of the list are incomplete tasks.
+
+2. The result box will display a message to indicate that the command has been executed successfully.
+
+  ![Toggle Completion Status Step 2](images/ToggleCompletionStatus2.png)
+
+3. All projects are ordered in default ascending alphabetical order without regard for their completion status.
+
+  ![Toggle Completion Status Step 3](images/ToggleCompletionStatus3.png)
+
+##### Sorting with Only Type Specified
+
+If you do not specify the sorting order, Momentum will assume that you would like to sort in ascending order.
+
+Format: `sort type/SORT_TYPE`
+
+Example: `sort type/deadline`
+
+The following walkthrough shows how you can sort projects in Momentum by specifying only the sort type.
+
+1. Key in command `sort type/deadline` in the command window and press <kbd>Enter</kbd>.
+
+  ![Deadline Sort 1](images/DeadlineSort1.png)
+
+  Note that the projects are not sorted in asceding deadline order.
+
+2. The result box will display a message to indicate that the command has been executed successfully.
+
+  ![Deadline Sort 2](images/DeadlineSort2.png)
+
+3. All projects are ordered in ascending deadline order.
+
+  ![Deadline Sort 3](images/DeadlineSort3.png)
+
+##### Sorting With Only Order Specified
+
+The current sort type is assumed if the `type` is not specified.
+
+If there is no existing project order (when the application restarts), order will be alphabetical by default.
+
+Format: `sort order/SORT_ORDER`
+
+Example: `sort order/dsc`
+
+The following walkthrough shows how you can sort projects in Momentum by specifying only the sort order.
+
+1. Key in command `sort order/dsc` in the command window and press <kbd>Enter</kbd>.
+
+  ![Deadline Sort Descending 1](images/DeadlineDescending1.png)
+
+  Note that currently the projects are sorted in ascending deadline order.
+
+2. The result box will display a message to indicate that the command has been executed successfully.
+
+  ![Deadline Sort Descending 2](images/DeadlineDescending2.png)
+
+3. All projects are ordered in descending deadline order.
+
+  ![Deadline Sort Descending 3](images/DeadlineDescending3.png)
+
+##### Sorting With Both Type and Order Specified
+
+This sorts items in the specified type and order.
+
+Example: `sort type/created order/dsc`
+
+The following walkthrough shows how you can sort projects in Momentum by specifying both sort type and order.
+
+1. Key in command `sort type/created order/dsc` in the command window and press <kbd>Enter</kbd>.
+
+  ![Created Descending 1](images/CreatedDescending1.png)
+
+  Note that the projects are not sorted by descending created date order.
+
+2. The result box will display a message to indicate that the command has been executed successfully.
+
+  ![Created Descending 2](images/CreatedDescending2.png)
+
+3. All projects are ordered in descending created date order.
+
+  ![Created Descending 3](images/CreatedDescending3.png)
+
+  Note that for projects with the same created date, they are sorted in descending alphabetical order.
+
+#### Searching for Items: `find`
+
+Done by Balasubramaniam Praveen
+
+Momentum allows you to make detailed searches for items based on a combination of their name, description, tags and completion status. This is done using the find command.
+
+Format: `find [match/FILTER_TYPE] [n/NAME [MORE_NAMES]...] [d/DESCRIPTION [MORE_DESCRIPTIONS]...] [t/TAG [MORE_TAGS]...] [c/COMPLETION_STATUS]`
+
+Here are some ways you can make simple searches using the find command. Advanced searches will be [discussed later](#searching-by-multiple-parameters). 
+
+<div markdown="block" class="alert alert-info">
+
+:bulb: You can only search for projects in the project view and tasks in the tasks view
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+:bulb: Search parameters are not case sensitive.
+
+</div>
+
+##### Searching by Name
+
+* The `n/` prefix checks whether a project has a certain name.
+
+* Searching by name only requires a partial match. This means that a project with the name `carpet` and `car` can potentially be the result of searching for the term `car`.
+
+The following walkthrough shows how you can use the find command to search for projects with `ad` in their name.
+
+1. Key in the command `find n/ad` in the command window and press <kbd>Enter</kbd>.
+
+  ![Find by Name Step 1](images/FindByName1.png)
+
+2. The result box will display a message to indicate that the command has been executed successfully.
+
+  ![Find by Name Step 2](images/FindByName2.png)
+
+3. All projects that contain `ad` in their name will be shown.
+
+  ![Find by Name Step 3](images/FindByName3.png)
+
+##### Searching by Description
+
+* The `d/` prefix checks whether an item has a certain description.
+
+* Searching by description only requires a partial match, similar to searching by name.
+
+The following walkthrough shows how you can use the find command to search for items with `discussion` in their description.
+
+1. Key in the command `find d/discussion` in the command window and press <kbd>Enter</kbd>.
+
+  ![Find by Description Step 1](images/FindByDesc1.png)
+
+2. The result box will display a message to indicate that the command has been executed successfully.
+
+  ![Find by Description Step 2](images/FindByDesc2.png)
+
+3. All projects that contain `discussion` in their description will be shown.
+
+  ![Find by Description Step 3](images/FindByDesc3.png)
+
+##### Searching by Tag
+
+* The `t/` prefix checks whether an item has a certain tag.
+
+* Searching by tags will require a full word match unlike searching by name or description. This means that searching for the tag `free` will not find an item with the tag `freelance`.
+
+<div markdown="block" class="alert alert-info">
+
+:bulb: Searches for tags require a full match whilst partial matches are sufficient for searches by name and description.
+
+</div>
+
+The following walkthrough shows how you can use the find command to search for projects with the tag `webdesign`.
+
+1. Key in the command `find t/webdesign` in the command window and press <kbd>Enter</kbd>.
+
+  ![Find by Tag Step 1](images/FindByTag1.png)
+
+2. The result box will display a message to indicate that the command has been executed successfully.
+
+  ![Find by Tag Step 2](images/FindByTag2.png)
+
+3. All projects that contain the tag `webdesign` will be shown.
+
+  ![Find by Tag Step 3](images/FindByTag3.png)
+
+##### Searching by Completion Status
+
+* Only the parameters `completed` and `incomplete` are accepted for `c/KEYWORD`.
+
+* The `c/` prefix checks whether an item is completed. For example, `c/completed` will check for the items that are completed.
+
+* When `c/` is not specified, both complete and incomplete items will be shown.
+
+The following walkthrough shows how you can use the find command to search for projects that have been completed.
+
+1. Key in the command `find c/completed` in the command window and press <kbd>Enter</kbd>.
+
+  ![Find by Completion Step 1](images/FindByCompletion1.png)
+
+2. The result box will display a message to indicate that the command has been executed successfully.
+
+  ![Find by Completion Step 2](images/FindByCompletion2.png)
+
+3. All projects that are completed will be shown.
+
+  ![Find by Completion Step 3](images/FindByCompletion3.png)
+
+##### Searching by Multiple Parameters
+
+You can search for items with multiple parameters for names, descriptions and tags in a single search.
+
+To do this, you can add all the parameters that you would like to search for in the command. For example, if you would like to search for items that contain either `discussion` or `drawing` in their description, you can do so by searching using the command `find d/discussion drawing`.
+
+In this command, each parameter to search for is separated by a whitespace.
+
+The following walkthrough shows you can use the find command to search for projects with `discussion` or `drawing` in their description.
+
+1. Key in the command `find d/discussion drawing` in the command window and press <kbd>Enter</kbd>.
+
+  ![Find by Multiple Parameters Step 1](images/FindByMultipleKeywords1.png)
+
+2. The result box will display a message to indicate that the command has been executed successfully.
+
+  ![Find by Multiple Parameters Step 2](images/FindByMultipleKeywords2.png)
+
+3. All projects that contain `discussion` or `drawing` in their description will be shown.
+
+  ![Find by Multiple Parameters Step 3](images/FindByMultipleKeywords3.png)
+
+You can use the same method to search for projects using multiple parameters for name or tags. However, this will not work with completion status. You can only search by one completion status. 
+
+##### Searching by Multiple Prefixes
+
+So far, you have learnt how to search for items that contain multiple parameters for a single prefix. But what if you want to search for items by multiple prefixes instead? 
+
+Momentum makes it extremely easy for you to do that. 
+
+To make such a search, all you need to do is add all the prefixes you would like to search for in a single find command. You can think of this as combining mulitple find commands together. For example, if you would like to search for items that contain either `certification` in their name or `discussion` in their description, you can do so by searching using the command `find n/certification d/discussion`.
+
+The following walkthrough shows you can use the find command to search for projects that contain either `certification` in their name or `discussion` in their description.
+
+1. Key in the command `find n/certification d/discussion` in the command window and press <kbd>Enter</kbd>.
+
+  ![Find by Multiple Prefixes Step 1](images/FindByMultipleParameters1.png)
+
+2. The result box will display a message to indicate that the command has been executed successfully.
+
+  ![Find by Multiple Prefixes Step 2](images/FindByMultipleParameters2.png)
+
+3. All projects that contain `certification` in their name or `discussion` in their description will be shown.
+
+  ![Find by Multiple Prefixes Step 3](images/FindByMultipleParameters3.png)
+
+You can also use multiple parameters for each prefix that allows for it as mentioned in the previous section. 
+
+<div markdown="block" class="alert alert-info">
+
+:bulb: If a certain search prefix is used more than once, the last entry will be used.
+`find n/a n/b n/c` will only search for items that contain`c` in their name.
+
+</div>
+
+##### Adding Match Type to Searches
+
+So far, you have learnt how to make searches by multiple parameters and prefixes. However, the searches shown so far show an item as long as there is any one parameter that matches it. But this might not be useful in some cases. What if you need to search for an item that matches all parameters, or does not match any of the parameters entered.
+
+This is where match type comes in. Match type can be added to your find command in addition to the prefixes and parameters you are searching by. 
+
+There are three values for the `match/` prefix.
+  * `match/all` shows an item only if **all** of the parameters and prefixes provided in your input matches the item.
+
+  * `match/any` shows an item as long as **any** of the parameters and prefixes provided in your input matches the item.
+
+  * `match/none` shows an item only if **none** of the parameters and prefixes provided in your input matches the item.
+
+<div markdown="block" class="alert alert-info">
+
+:bulb: **Tip:**
+`match/any` will be used if the `match` type is not specified.
+
+</div>
+
+Here is an example to illustrate this concept more clearly. Consider the following command `find n/ad d/discussion t/artcomm`. We will compare how different match types affect the results displayed for the same command.
+
+Let's first look at `match/any`. This match type shows an item as long as any parameter matches your input. It is also the default behaviour of the find command. The following walkthrough shows how to use `match/any`. 
+
+1. Key in the command `find n/ad d/discussion t/artcomm match/any` in the command window and press <kbd>Enter</kbd>.
+
+  ![Match Any Step 1](images/MatchAny1.png)
+
+2. The result box will display a message to indicate that the command has been executed successfully.
+
+  ![Match Any Step 2](images/MatchAny2.png)
+
+3. All projects that contain `ad` in their name or `discussion` in their description or the tag `artcomm` will be shown.
+
+  ![Match Any Step 3](images/MatchAny3.png)
+
+As seen in the example above, an item is shown as long as any one of the parameters matches it. 
+
+Let's now look at `match/all`. This match type shows an entry only if all parameters matches your input. The following walkthrough shows how to use `match/all`. 
+
+1. Key in the command `find n/ad d/discussion t/artcomm match/all` in the command window and press <kbd>Enter</kbd>.
+
+  ![Match All Step 1](images/MatchAll1.png)
+
+2. The result box will display a message to indicate that the command has been executed successfully.
+
+  ![Match All Step 2](images/MatchAll2.png)
+
+3. All projects that contain `ad` in their name and `discussion` in their description and the tag `artcomm` will be shown.
+
+  ![Match All Step 3](images/MatchAll3.png)
+
+As seen in the example above, an item is only shown if all parameters matches it. 
+
+Finally, let's look at `match/none`. This match type shows an item only if none of the parameters matches your input. The following walkthrough shows how to use `match/none`. 
+
+1. Key in the command `find n/ad d/discussion t/artcomm match/none` in the command window and press <kbd>Enter</kbd>.
+
+   ![Match None Step 1](images/MatchNone1.png)
+
+2. The result box will display a message to indicate that the command has been executed successfully.
+
+   ![Match None Step 2](images/MatchNone2.png)
+
+3. All projects that do not contain `ad` in their name, `discussion` in their description and the tag `artcomm` will be shown.
+
+   ![Match None Step 3](images/MatchNone3.png)
+
+As seen in the example above, an item is only shown if none of the parameters matches it.
+
+The possibilities of using match type to enhance your searches are limitless. Here are some examples where `match/all
+` and `match/none` may come in handy.
+
+1. If you have many items and want to find a specific one, you can use `match/all` to narrow down your search results.
+
+2. If you have many items and want to find those that are not part of a certain category, you can use `match/none` to narrrow down your search results.
 
 #### View All : `list`
 
@@ -490,344 +897,25 @@ When you are viewing a project's tasks, this command shows you a list of all the
 <div markdown="block" class="alert alert-info">
 
 :bulb:
-Note that this command is different from the `home` command. When viewing a project's tasks, the `home` command will change the view to show you all the projects being tracked by Momentum. However, the `list` will only show you all the tasks for the project.
+Note that this command is different from the `home` command. When viewing a project's tasks, the `home` command will change the view to show you all the projects being tracked by Momentum. However, the `list` command will only show you all the tasks for the project.
 
 </div>
 
 Format: `list`
 
-##### Walkthrough of viewing all projects
-Suppose you ahd previously executed a [find command]() and would like to see all your projects again.
+The following walkthrough shows how you can list projects or tasks in Momentum.
+
+Suppose you had previously executed a [find command](#searching-for-items-find) and would like to see all your projects again.
 
 ![List1](images/List1.png)
 
-1. Type `list` into the command box and press <kbd>Enter</kbd>
+1. Type `list` into the command box and press <kbd>Enter</kbd>.
 
     ![List2](images/List2.png)
     
 2. The results box will display a message to indicate that all your projects are being displayed. You should see that all your projects are being displayed in the displayed list.
 
     ![List3](images/List3.png)
-
-#### Sort Projects : `sort`
-
-Done by Kang Su Min
-
-This command allows you to sort the list of displayed projects or tasks in a particular sort type and order.
-
-Format: `sort [type/SORT_TYPE] [order/SORT_ORDER] [c/]`
-
-* There are 3 sort types.
-  * `type/alpha` will sort the list of projects in alphabetical order.
-  * `type/deadline` will sort the list of projects according to their deadlines.
-  * `type/created` will sort the list of projects according to their date of creation.
-
-* There are 2 sort orders.
-  * `order/asc` will sort the list of projects in ascending order.
-  * `order/dsc` will sort the list of projects in descending order.
-
-In addition to the above sort types and orders, the list can be sorted by completion status.
-* This is the "dominant sort" that will ensure that all incomplete projects/tasks are above complete projects/tasks, before sorting the projects/tasks in the specified sort type and order above.
-* The default sort order will sort the projects/tasks by completion status.
-* `sort c/` will toggle the default completion status sort.
-    * Once the completion status sort is off, the projects/tasks will be sorted in the specified sort type and order without regard for their completion status.
-
-<div markdown="block" class="alert alert-primary">
-
-:bulb: 
-* When the application first starts, the completion status order is on. This completion status sort status (on/off) is maintained until it is toggled.
-* `type/alpha` and `order/asc` will be used as default if both sort type and order are not specified (i.e. command is `sort`)
-* For both `sort type/deadline` and `sort type/created`, projects with the same deadline or same created date will be sorted in alphabetical order.
-* For `sort type/deadline`, projects/tasks with deadlines will appear at the top of the list sorted in deadline order, while those without deadlines will be pushed to the end of the list sorted in alphabetical order
-
-</div>
-
-**Sorting by Default Order**
-
-Format: `sort`
-
-This sorts projects in default ascending alphabetical order.
-
-The following walkthrough shows how you can sort projects in Momentum by the default order.
-
-1. Key in command `sort` in the command window then press <kbd>Enter</kbd>.
-![Default Sort Step 1](images/DefaultSort1.png)
-2. The result box will display a message to indicate that the command has been executed successfully:
-![Default Sort Step 2](images/DefaultSort2.png)
-3. All projects are ordered in default ascending alphabetical order with incomplete tasks showing up at the top of the list (Completion status sort is on).
-![Default Sort Step 3](images/DefaultSort3.png)
-
-##### Sorting With Completion Status Toggle
-
-Format: `sort c/`
-
-This toggles the completion status order i.e. if the completion status order is "on", the completion status order is turned "off", vice versa.
-
-The following walkthrough shows how you can toggle the completion status order in Momentum.
-
-1. Key in command `sort c/` in the command window then press <kbd>Enter</kbd>.
-![Toggle Completion Status Step 1](images/ToggleCompletionStatus1.png)
-Note that currently all projects at the top of the list are incomplete tasks.
-2. The result box will display a message to indicate that the command has been executed successfully:
-![Toggle Completion Status Step 2](images/ToggleCompletionStatus2.png)
-3. All projects are ordered in default ascending alphabetical order without regard for their completion status.
-![Toggle Completion Status Step 3](images/ToggleCompletionStatus3.png)
-
-##### Sorting with Only Type Specified
-
-`order/asc` is assumed if the `order` is not specified.
-Hence, this sorts projects by the specified sort type, in ascending order.
-
-Format: `sort type/SORT_TYPE`
-
-Example: `sort type/deadline`
-
-The following walkthrough shows how you can sort projects in Momentum by specifying only the sort type.
-
-1. Key in command `sort type/deadline` in the command window then press <kbd>Enter</kbd>.
-![Deadline Sort 1](images/DeadlineSort1.png)
-Note that the projects are not sorted in asceding deadline order.
-2. The result box will display a message to indicate that the command has been executed successfully:
-![Deadline Sort 2](images/DeadlineSort2.png)
-3. All projects are ordered in ascending deadline order.
-![Deadline Sort 3](images/DeadlineSort3.png)
-
-##### Sorting With Only Order Specified
-
-The current sort type is assumed if the `type` is not specified.
-If there is no existing project order (when the application restarts), order will be alphabetical by default.
-
-Format: `sort order/SORT_ORDER`
-
-Example: `sort order/dsc`
-
-The following walkthrough shows how you can sort projects in Momentum by specifying only the sort order.
-
-1. Key in command `sort order/dsc` in the command window then press <kbd>Enter</kbd>.
-![Deadline Sort Descending 1](images/DeadlineDescending1.png)
-Note that currently the projects are sorted in ascending deadline order.
-2. The result box will display a message to indicate that the command has been executed successfully:
-![Deadline Sort Descending 2](images/DeadlineDescending2.png)
-3. All projects are ordered in descending deadline order.
-![Deadline Sort Descending 3](images/DeadlineDescending3.png)
-
-##### Sorting With Both Type and Order Specified
-
-This sorts projects in the specified type and order.
-
-Example: `sort type/created order/dsc`
-
-The following walkthrough shows how you can sort projects in Momentum by specifying both sort type and order.
-
-1. Key in command `sort type/created order/dsc` in the command window then press <kbd>Enter</kbd>.
-![Created Descending 1](images/CreatedDescending1.png)
-Note that the projects are not sorted by descending created date order.
-2. The result box will display a message to indicate that the command has been executed successfully:
-![Created Descending 2](images/CreatedDescending2.png)
-3. All projects are ordered in descending created date order.
-![Created Descending 3](images/CreatedDescending3.png)
-Note that for projects with the same created date, they are sorted in descending alphabetical order.
-
-#### Filtering Projects: `find`
-
-Done by Balasubramaniam Praveen
-
-Momentum allows you to make detailed searches for projects or tasks based on a combination of their name, description, tags and completion status. This is done using the find command.
-
-Format: `find [match/FILTER_TYPE] [n/NAME [MORE_NAMES]...] [d/DESCRIPTION [MORE_DESCRIPTIONS]...] [t/TAG [MORE_TAGS]...] [c/COMPLETION_STATUS]`
-
-Let us now take a look at how to make simple searches using the find command. Advanced searches that utilize the match parameter will be discussed later. 
-
-<div markdown="block" class="alert alert-info">
-
-:bulb: **Tip:**
-You can only search for projects in the project view and tasks in the tasks view
-
-</div>
-
-<div markdown="block" class="alert alert-info">
-
-:bulb: **Tip:**
-Search parameters are not case sensitive.
-
-</div>
-
-<div markdown="block" class="alert alert-info">
-
-:bulb: **Tip:**
-The projects/tasks in Momentum will no longer be filtered after the `Add`, `View` or `Home` Commands are used.
-They will continue to be filtered after the `Edit` and `Delete` Commands are used.
-</div>
-
-##### Searching by Name
-
-* The `n/` command checks whether a project has a certain name. There can be multiple names added to this command. For example, `n/car window` will check for the projects that contain `car` or `window` in their names.
-* Searching by name only requires a partial match. This means that a project with the name `carpet` and `car` can potentially be the result of searching for the term `car`.
-
-The following walkthrough shows how you can use the find command to search for projects with `ad` in their names.
-
-1. Key in the command `find n/ad` in the command window.
-![Find by Name Step 1](images/FindByName1.png)
-2. The result box will display a message to indicate that the command has been executed successfully:
-![Find by Name Step 2](images/FindByName2.png)
-3. All projects that contain `ad` in their name will be shown.
-![Find by Name Step 3](images/FindByName3.png)
-
-##### Searching by Description
-
-* The `d/` command checks whether a project has a certain description. There can be multiple descriptions added to this command. For example, `d/sunday october` will check for the projects that contain `sunday` or `october` in their description.
-* Searching by description only requires a partial match, similar to searching by name.
-
-The following walkthrough shows how you can use the find command to search for projects with `discussion` in their description.
-
-1. Key in the command `find d/discussion` in the command window.
-![Find by Description Step 1](images/FindByDesc1.png)
-2. The result box will display a message to indicate that the command has been executed successfully:
-![Find by Description Step 2](images/FindByDesc2.png)
-3. All projects that contain `discussion` in their description will be shown.
-![Find by Description Step 3](images/FindByDesc3.png)
-
-##### Searching by Tag
-
-* The `t/` command checks whether a project has a certain tag. There can be multiple tags added to this command. For example, `t/freelance errands` will check for the projects that contain the tags `freelance` or `errands`.
-* Searching by tags will require a full word match unlike searching by name or description. This means that searching for the tag `free` will not find a project with the tag `freelance`.
-
-<div markdown="block" class="alert alert-info">
-
-:bulb: **Tip:**
-Searches for tags require a full match whilst partial matches are sufficient for searches by name and description.
-
-</div>
-
-The following walkthrough shows how you can use the find command to search for projects with the tag `webdesign`.
-
-1. Key in the command `find t/webdesign` in the command window.
-![Find by Tag Step 1](images/FindByTag1.png)
-2. The result box will display a message to indicate that the command has been executed successfully:
-![Find by Tag Step 2](images/FindByTag2.png)
-3. All projects that contain the tag `webdesign` will be shown.
-![Find by Tag Step 3](images/FindByTag3.png)
-
-##### Searching by Completion Status
-
-* There are keywords, completed and incomplete for`c/KEYWORD`. Other keywords are not accepted.
-* The `c/` command checks whether a project is completed. For example, `c/completed` will check for the projects that are completed.
-* When `c/` is not specified, both complete and incomplete projects will be shown.
-
-The following walkthrough shows how you can use the find command to search for projects that have been completed.
-
-1. Key in the command `find c/completed` in the command window.
-![Find by Completion Step 1](images/FindByCompletion1.png)
-2. The result box will display a message to indicate that the command has been executed successfully:
-![Find by Completion Step 2](images/FindByCompletion2.png)
-3. All projects that are completed will be shown.
-![Find by Completion Step 3](images/FindByCompletion3.png)
-
-##### Searching by Multiple Keywords
-
-You can search for projects or tasks with multiple keywords for names, descriptions and tags in a single search.
-
-To do this, you can add all the keywords that you would like to search for in the command. For example, if you would like to
-search for projects or tasks that contain either `discussion` or `drawing` in their descriptions, you can do so by searching using
-the command `find d/discussion drawing`.
-
-In this command, each keyword to search for is separated by a whitespace.
-
-The following walkthrough shows you can use the find command to search for projects with `discussion` or `drawing` in their description.
-
-1. Key in the command `find d/discussion drawing` in the command window.
-![Find by Multiple Keywords Step 1](images/FindByMultipleKeywords1.png)
-2. The result box will display a message to indicate that the command has been executed successfully:
-![Find by Multiple Keywords Step 2](images/FindByMultipleKeywords2.png)
-3. All projects that contain `discussion` or `drawing` in their description will be shown.
-![Find by Multiple Keywords Step 3](images/FindByMultipleKeywords3.png)
-
-You can use the same method to search for projects using multiple keywords for name or tags. However, this will not work with completion status. You can only search by one completion status. 
-
-##### Searching by Multiple Parameters
-
-So far, you have learnt how to search for projects that contain multiple keywords for a single parameter. But what if you want to search for projects by multiple parameters instead? 
-
-Momentum makes it extremely easy for you to do that. 
-
-To make such a search, all you need to do is add all the parameters you would like to search for in a single find command. You can think of this as combining mulitple find commands together. For example, if you would like to search for projects or tasks that contain either `certification` in their name or `discussion` in their description, you can do so by searching using the command `find n/certification d/discussion`.
-
-The following walkthrough shows you can use the find command to search for projects that contain either `certification` in their names or `discussion` in their description.
-
-1. Key in the command `find n/certification d/discussion` in the command window.
-![Find by Multiple Parameters Step 1](images/FindByMultipleParameters1.png)
-2. The result box will display a message to indicate that the command has been executed successfully:
-![Find by Multiple Parameters Step 2](images/FindByMultipleParameters2.png)
-3. All projects that contain `certification` in their name or `discussion` in their description will be shown.
-![Find by Multiple Parameters Step 3](images/FindByMultipleParameters3.png)
-
-You can use the same method to search for projects by a combination of other parameters as well. You can also use multiple keywords for each parameter that allows for it as mentioned in the previous section. 
-
-<div markdown="block" class="alert alert-info">
-
-:bulb: **Tip:**
-If a certain search type is used more than once, the latest entry will be used.
-`find n/a n/b n/c` will only search for projects/tasks that contain`c` in their name.
-
-</div>
-
-##### Adding Match Type to Searches
-
-So far, you have learnt how to make searches by multiple keywords and parameters. However, the searches shown so far show a project as long as there is any one keyword that matches it. But this might not be useful in some cases. What if you need to search for a project that matches all keywords, or does not match any of the keywords entered.
-
-This is where match type comes in. Match type can be added to your find command in addition to the parameters you are searching by. 
-
-There are three values for the `match` parameter.
-  * `match/all` shows an entry only if **all** of the keywords and parameters provided in the user's input matches the entry.
-  * `match/any` shows an entry as long as **any** of the keywords and parameters provided in the user's input matches the entry.
-  * `match/none` shows an entry only if **none** of the keywords and parameters provided in the user's input matches the entry.
-
-<div markdown="block" class="alert alert-info">
-
-:bulb: **Tip:**
-`match/any` will be used if the `match` type is not specified.
-
-</div>
-
-This might be a little confusing, so let's dive right into an example. We'll look at the example `find n/ad d/discussion t/artcomm` and compare how match type affects the results displayed.
-
-Let's first look at `match/any`. This match type shows an entry as long as any keyword matches the user's input. It is also the default behaviour of the find command. The following walkthrough shows how to use `match/any`. 
-
-1. Key in the command `find n/ad d/discussion t/artcomm match/any` in the command window.
-![Match Any Step 1](images/MatchAny1.png)
-2. The result box will display a message to indicate that the command has been executed successfully:
-![Match Any Step 2](images/MatchAny2.png)
-3. All projects that contain `ad` in their name or `discussion` in their description or the tag `artcomm` will be shown.
-![Match Any Step 3](images/MatchAny3.png)
-
-As seen in the example above, an entry is shown as long as any one of the keywords matches the project. 
-
-Let's now look at `match/all`. This match type shows an entry only if all keywords matches the user's input. The following walkthrough shows how to use `match/all`. 
-
-1. Key in the command `find n/ad d/discussion t/artcomm match/all` in the command window.
-![Match All Step 1](images/MatchAll1.png)
-2. The result box will display a message to indicate that the command has been executed successfully:
-![Match All Step 2](images/MatchAll2.png)
-3. All projects that contain `ad` in their name and `discussion` in their description and the tag `artcomm` will be shown.
-![Match All Step 3](images/MatchAll3.png)
-
-As seen in the example above, an entry is only shown if all keywords matches the project. 
-
-Finally, let's look at `match/none`. This match type shows an entry only if none of the keywords matches the user's input. The following walkthrough shows how to use `match/none`. 
-
-1. Key in the command `find n/ad d/discussion t/artcomm match/none` in the command window.
-![Match None Step 1](images/MatchAll1.png)
-2. The result box will display a message to indicate that the command has been executed successfully:
-![Match None Step 2](images/MatchAll2.png)
-3. All projects that do not contain `ad` in their name, `discussion` in their description and the tag `artcomm` will be shown.
-![Match None Step 3](images/MatchAll3.png)
-
-As seen in the example above, an entry is only shown if none of the keywords matches the project. 
-
-The posibilities of using match type to enhance your searches is limitless. Here are some examples where `match/all` and `match/none` may come in handy.
-
-1. If you have many projects and want to find a specific project, you can use `match/all` to narrow down your search results.
-2. If you have many projects and want to find projects that are not part of a certain category, you can use `match/none` to narrrow down your search results.
 
 ### Time Tracking
 
@@ -882,7 +970,7 @@ On the left side of the window is the Active Timers Panel. This is where Momentu
 ![ActiveTimersUI](images/ActiveTimersUI.png)
 Figure X: Location of the Active Timers Panel.
 
-This panel will show you the name of the project/task, as well as when the timer was started.
+This panel will show you the name of the item, as well as when the timer was started.
 
 #### Time Tracking Example
 
@@ -933,9 +1021,9 @@ Done by Cheong Ying Yi Clara
 
 * A reminder will be shown in the reminder panel of the sidebar at the date and time you specified.
 
-* Momentum will remove the reminder in the project/task after it is shown in the sidebar.
+* Momentum will remove the reminder in the item after it is shown in the sidebar.
 
-* If you missed a reminder, it will be greyed out in the project/task.
+* If you missed a reminder, it will be greyed out in the item.
 
 * You can refer to [Walkthrough of Creating a Project](#walkthrough-of-creating-a-project) for more details on how you can add a reminder.
 
@@ -962,7 +1050,7 @@ Format: `undo`
 
 Example: `start 1`, `undo`
 
-Result: Timer for project/task at index 1 is started, then stopped and removed after `undo` is executed.
+Result: Timer for item at index 1 is started, then stopped and removed after `undo` is executed.
 
 The following walkthrough shows how a user can start a timer for a project, then undo the command.
 
@@ -1018,7 +1106,7 @@ Note: The projects are currently sorted in alphabetical, ascending order (defaul
 Done by Farrell Nah Jun Hao
 
 Momentum uses the data collected from your timers (see [time tracking](#time-tracking)) to calculate statistics. These
- statistics are automatically generated and updated whenever you make any changes to your projects and tasks, such as
+ statistics are automatically generated and updated whenever you make any changes to your items, such as
   when you start or stop a new timer.
  These statistics can be seen in a panel on the left side of the window, as shown here:
 
@@ -1057,9 +1145,8 @@ Figure X: Sections of the statistics panel.
 
 The statistics are displayed in 2 different formats:
 
-1. **Pie Chart**: Shows the relative time spent on each project. Useful for comparing different projects and tasks. Projects
- and tasks with less time spent on them may not be shown.
-2. **Table**: Shows the exact (in minutes) amount of time spent on each project. Useful for calculations.
+1. **Pie Chart**: Shows the relative time spent on each item. Useful for comparing different items. Items with less time spent on them may not be shown.
+2. **Table**: Shows the exact (in minutes) amount of time spent on each item. Useful for calculations.
 
 ### Settings
 
@@ -1091,7 +1178,7 @@ Result: Sets a light theme to the GUI and changes the statistics pane to show th
 3. Your GUI has now been set to the light theme, and information in your statistics panel has been updated.
  ![Settings Walkthrough Step 3](images/SettingsDiagram3.png)
 
-### Clear All Projects/Tasks : `clear`
+### Clear All items : `clear`
 
 Done by Farrell Nah Jun Hao
 
@@ -1145,7 +1232,7 @@ Result: The reminder panel of the sidebar will be hidden.
 
 <div markdown="block" class="alert alert-danger">
 
-:warning: Momentum cannot show a reminder that you dismissed in the reminder panel again. You can undo a dismissal to show an expired reminder in the project/task.
+:warning: Momentum cannot show a reminder that you dismissed in the reminder panel again. You can undo a dismissal to show an expired reminder in the item.
 
 </div>
 
@@ -1241,15 +1328,15 @@ Result: Exits the program.
 
 Action | Format | Example
 --------|-------|-----------
-**View tasks in a project**| `view ID` |`view 3`
-**View all projects**| `home` | -
-**Creating a Project/Task** | `add n/NAME [d/DESCRIPTION] [c/] [dd/DEADLINE_DATE [dt/DEADLINE_TIME]] [r/REMINDER_DATE_TIME] [t/TAG]​`|  `project n/Momentum d/CS2103T Team Project dd/2021-12-07 t/impt`
-**Editing a Project/Task** | `edit ID [n/NAME] [d/DESCRIPTION] [c/]  [dd/DEADLINE_DATE [dt/DEADLINE_TIME]] [r/REMINDER_DATE_TIME] [t/TAG]`| `edit 3 n/NewMomentum d/NewDescription dd/2021-12-07 r/2021-12-07T01:21:21 t/normal`
-**Delete a project/task** | `delete ID` | `delete 3`
-**Clear all projects/tasks** | `clear` | -
-**Find a project/task** | `find [match/FILTER_TYPE] [n/NAME [MORE_NAMES]...] [d/DESCRIPTION [MORE_DESCRIPTIONS]...] [t/TAG [MORE_TAGS]...]  [c/COMPLETION_STATUS]`  | `find match/any n/Momentum d/new t/normal`
-**Show all projects/tasks (after find)** | `list` | -
-**Sort projects/tasks** | `sort [type/SORT_TYPE] [order/SORT_ORDER] [c/]` | `sort type/deadline order/dsc c/`
+**View Tasks in a Project**| `view ID` |`view 3`
+**View all Projects**| `home` | -
+**Creating an Item** | `add n/NAME [d/DESCRIPTION] [c/] [dd/DEADLINE_DATE [dt/DEADLINE_TIME]] [r/REMINDER_DATE_TIME] [t/TAG]​`|  `project n/Momentum d/CS2103T Team Project dd/2021-12-07 t/impt`
+**Editing an Item** | `edit ID [n/NAME] [d/DESCRIPTION] [c/]  [dd/DEADLINE_DATE [dt/DEADLINE_TIME]] [r/REMINDER_DATE_TIME] [t/TAG]`| `edit 3 n/NewMomentum d/NewDescription dd/2021-12-07 r/2021-12-07T01:21:21 t/normal`
+**Delete an Item** | `delete ID` | `delete 3`
+**Clear all Items** | `clear` | -
+**Find an Item** | `find [match/FILTER_TYPE] [n/NAME [MORE_NAMES]...] [d/DESCRIPTION [MORE_DESCRIPTIONS]...] [t/TAG [MORE_TAGS]...]  [c/COMPLETION_STATUS]`  | `find match/any n/Momentum d/new t/normal`
+**Show all Items (after find)** | `list` | -
+**Sort Items** | `sort [type/SORT_TYPE] [order/SORT_ORDER] [c/]` | `sort type/deadline order/dsc c/`
 **Start Timer** | `start ID` | `start 2`
 **Stop Timer** | `stop ID` | `stop 2`
 **Dismissing a Reminder** | `dismiss` | -
