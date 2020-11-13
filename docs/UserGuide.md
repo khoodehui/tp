@@ -3,21 +3,47 @@ layout: page
 title: User Guide
 ---
 
-Momentum is a **desktop app** that **helps freelancers track time spent on different projects** and **gain insights on how their time is spent**.
-
-It is designed for people that prefer typing, so that frequent tasks can be done faster by typing in commands.
+![Momentum Logo](images/logo.png)
+<div style="page-break-after: always;"></div>
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-## About This Document
-This user guide provides detailed explanation and walkthroughs on the features and functionalities of Momentum. If you wish to learn how to use Momentum, this guide is for you. Before proceeding on, here are a few things you should take note about this document.
+## Introduction
+
+Attention all freelancers, here is an application you have always wanted, but never got to experience!
+
+We freelancers are always busy managing multiple projects at once. On top of that, each project comes with its own tasks and deadlines. This list is endless, but sadly, our brain capacity is exhausive.
+
+As freelancers ourselves, we understand. We too have had times where we woke up feeling fresh, before realising (with a shiver down our spine) that we have completely forgotten about a certain project deadline. 
+
+This is why we have developed an application for freelancers, and freelancers only. 
+
+Leave it to Momentum to do the following for you:
+* **Organisation of Projects**
+    * View projects’  sub-tasks, deadline, description with just a few keystrokes.
+    * Find any projects and task in Momentum with a single command.
+    * Sort projects in different orders to your convenience at any time.
+* **Project Management**
+    * Set reminders to remind you of upcoming deadlines.
+* **Time Management**
+    * Keep track of how much time you have been spending on each project using our time-tracking tools.
+    * Gain insights into your time usage with our statistics feature.
+* **Personalisation**
+    * Personalise Momentum’s settings to fit your preference.
+
+We present you Momentum, the application that will make sure you never lose your momentum in your work ever again.
+
+Momentum is a Command Line Interface (CLI) application equipped with Graphical User Interface (GUI) that is interactive, visually appealing, and easy to use. This means everything within our application can be done with just your keyboard, which provides a user-friendly experience for you. 
+
+## About this Document
+This user guide provides detailed explanations and walkthroughs on the features available in Momentum. If you wish to learn how to use Momentum, this guide is for you. While reading this document, here are a few things you should take note of.
 
 ### Notations Used
-Throughout this document, you may come across these notations:
+Throughout this document, you will come across these notations:
 
-* **Clickable Links**: Words or phrases that are blue in colour are links which you can click on that will take you over to the section or page as describe. For example, clicking on [this]() will take you back to the introduction of the user guide.
+* **Clickable Links**: Words or phrases that are blue in colour are links which you can click on that will take you over to the section or page as described. For example, clicking on [this](#introduction) will take you back to the introduction of the user guide. 
 
 * **Info Boxes**: These will display additional information that is good for you to know. There are two types of boxes, tip and warning boxes, and they are showed below:
 
@@ -35,24 +61,89 @@ Throughout this document, you may come across these notations:
 
 * **Keyboard Keys**: Words that are wrapped in a box like <kbd>this</kbd> points to a corresponding key on your keyboard.
 
-### Complex Terms
-Are we still hyperlinking those terms to the glossary?
 
-### Screenshots
-Screenshots of the application in this document shows the application being used in a macOS operating system. However, note that this application can be used on other major operating systems as well.
+### Command Format
+
+You will be presented with multiple commands throughout this document. You may find the description of the command format below.
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Blog Design`.
+* Items in square brackets are optional.
+  e.g `n/NAME [t/TAG]` can be used as `n/Blog Design t/friend` or as `n/Blog Design`.
+* Items with `…`​ after them can be used multiple times including zero times.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…` inside square brackets `[t/TAG [MORE_TAGS]...]` can take in multiple space separated arguments
+  e.g. `[[t/TAG [MORE_TAGS]...]` can represent `t/friend friend family`.
+* Parameters can be in any order.
+  e.g. If the command specifies `n/Blog Design dd/2020-11-05`, `dd/2020-11-05 n/Blog Design` is also acceptable.
+
+
+#### Index Format
+
+* You need to enter an id which refers to the id number shown in the displayed project/task list.
+
+* You need to enter a **positive integer** such as 1, 2, 3, …​
+
+### Date and Time Terms
+
+This is a guide to the date and time formats used in Momentum.
+
+#### Date Terms
+
+Dates should be entered in the order `YYYY-MM-DD`.
+
+Term  | Meaning | Example
+----- |-------- | -------
+`YYYY`| Year    | `2020`
+`MM`  | Month   | `02`
+`DD`  | Day     | `09`
+
+**Valid**: `2020-08-02`
+
+**Invalid**: `2-8-20` Wrong number of digits.
+
+**Invalid**: `02-08-20` Wrong order of year, month and date.
+
+**Invalid**: `2nd August 2020` You cannot use text to enter dates.
+
+#### Time Terms
+
+Times should be entered in 24 hour format, in the order `HH:MM:SS`.
+
+Term | Meaning | Example
+-----|-------- | -------
+HH   | Hour    | `16`
+MM   | Minute  | `52`
+SS   | Second  | `03`
+
+**Valid**: `15:08:02`
+
+**Invalid**: `15:8:2` Wrong number of digits.
+
+**Invalid**: `8:15:2` Wrong order of hour, minute and second.
+
+**Invalid**: `03:08:02PM` Only 24 hour time is accepted.
+
+#### Combining Date and Time
+
+You may also have to enter both dates and times together. When entered together, dates and times should be entered in the order `YYYY-MM-DDTHH:MM:SS`. The letter `T` separates the date and time.
+
+**Valid**: `2020-08-02T15:08:02`
+
+**Invalid**: `15:08:02T2020-08-02` Wrong order of date and time.
 
 ## Quick Start<a name="quick-start"></a>
 
 1. Ensure you have Java `11` or above installed in your computer.
 
-2. Download the latest `momentum.jar` from [here](https://github.com/AY2021S1-CS2103T-T10-1/tp/releases).
+2. Download the latest file from [here](https://github.com/AY2021S1-CS2103T-T10-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for Momentum.
 
 4. Double-click the file to start Momentum. The GUI similar to below should appear in a few seconds. <br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press `Enter` to execute it. e.g. typing `help` and pressing `Enter` will open the help window.<br>
+5. Type the command in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing `help` and pressing <kbd>Enter</kbd> will open the help window.<br>
 
    Some example commands you can try:
 
@@ -62,7 +153,7 @@ Screenshots of the application in this document shows the application being used
 
    * `add n/Momentum d/CS2103T Team Project` : Add a project named `Momentum` to the Project Book in project view. Add a task named `Momentum` to the project in task view.
 
-   * `edit 3 n/NewMomentum d/newDescription` : Update the 3rd project/task in the current list. The name will be changed to "NewMomentum" and the description will be changed to "NewDescription".
+   * `edit 3 n/NewMomentum d/newDescription` : Update the 3rd project/task in the current list. The name will be changed to `NewMomentum` and the description will be changed to `NewDescription`.
 
    * `delete 3` : Delete the 3rd project/task shown in the current list.
 
@@ -84,7 +175,7 @@ Refer to the [Features](#features) below for a more comprehensive set of feature
 
 ## User Interface Overview
 
-Momentum uses a graphical user interface (GUI) to interact with you. This is where you will give your inputs, and where Momentum will display information to you. This section will give you a walkthrough on the GUI of Momentum.
+Momentum uses a graphical user interface (GUI) to interact with you. This is where you will give your input, and where Momentum will display information to you. This section will give you a walkthrough on the GUI of Momentum.
 
 ### User Interface Components
 
@@ -95,24 +186,23 @@ Figure X: GUI of Momentum with different components marked out.
 
 With reference to the numbered labels in Figure X, these are the GUI components and their functions:
 
-1. **Menu Bar**: The menu bar allows you to exit the application, or view this document. To exit the application, click on the `File` button and select "Exit". To view this document, click on the `Help` button and select "User Guide". A window containing the website address to this guide should appear.
+1. **Menu Bar**: The menu bar allows you to exit the application, or view this document. To exit the application, click on the `File` button and select `Exit`. To view this document, click on the `Help` button and select `User Guide`. A window containing the website address to this guide should appear.
 
 2. **Command Box**: This is where you will enter in your commands. After typing your command, hit <kbd>Enter</kbd> to execute them. If you enter an invalid command, your input will turn red.
 
 3. **Result Box**: This is where Momentum will give you feedback on commands that you execute.
 
-4. **Display List**: Displays a list your projects or tasks and all the information pertaining to them.
+4. **Displayed List**: Displays a list your projects or tasks and all the information pertaining to them.
 
-5. **Reminders Panel**: This is where your reminders will appear. The panel will only show when you have reminders that have not yet been dismissed. (see [Reminders](#reminders))
+5. **Reminders Panel**: This is where your [reminders](#reminders) will appear. The panel will only show when you have reminders that have not yet been dismissed.
 
-6. **Active Timers Panel**: Displays a list of all your running timers.
-(see [Active Timers Panel](#active-timers-panel))
+6. **Active Timers Panel**: Displays a list of all your running [timers](#active-timers-panel).
 
-7. **Statistics Panel**: Displays the statistics of your time usage calculated by Momentum. (see [Statistics](#statistics))
+7. **Statistics Panel**: Displays the [statistics](#statistics) of your time usage calculated by Momentum.
 
-8. **Tags Panel**: Shows a collection of all the tags that are currently present in the display list.
+8. **Tags Panel**: Shows a collection of all the tags that are currently present in the displayed list.
 
-9. **Bottom Bar**: Information about what you are currently viewing on the display list will be shown here. The left side of the bar tells you which project you are viewing, and the right side of the bar tells you how many items are present on the display list, out of the total number of items that you have.  
+9. **Bottom Bar**: Information about what you are currently viewing on the displayed list will be shown here. The left side of the bar tells you which project you are viewing, and the right side of the bar tells you how many items are present on the displayed list, out of the total number of items that you have.  
 
 <div markdown="block" class="alert alert-info">
 
@@ -126,84 +216,14 @@ The GUI of Momentum also comes with two themes, Light and Dark. These themes are
 ![GUI Themes](images/UITheme.png)
 Figure X: Momentum GUI theme
 
-By default, the theme of Momentum is set to Dark. If you want to adjust the theme, you can do so by changing it in the application settings. (see [Settings](#settings))
-
-## Command Format
-
-Below is an explanation of the formatting used to show commands:
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Blog Design`.
-* Items in square brackets are optional.
-  e.g `n/NAME [t/TAG]` can be used as `n/Blog Design t/friend` or as `n/Blog Design`.
-* Items with `…`​ after them can be used multiple times including zero times.
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Items with `…` inside square brackets `[t/TAG [MORE_TAGS]...]` can take in multiple space separated arguments
-  e.g. `[[t/TAG [MORE_TAGS]...]` can represent `t/friend friend family`.
-* Parameters can be in any order.
-  e.g. If the command specifies `n/Blog Design dd/2020-11-05`, `dd/2020-11-05 n/Blog Design` is also acceptable.
-
-## Date and Time Terms
-
-This is a guide to the date and time formats used in Momentum.
-
-### Date Terms
-
-Dates should be entered in the order `YYYY-MM-DD`.
-
-Term  | Meaning | Example
------ |-------- | -------
-`YYYY`| Year    | `2020`
-`MM`  | Month   | `02`
-`DD`  | Day     | `09`
-
-**Valid**: `2020-08-02`
-
-**Invalid**: `2-8-20` Wrong number of digits.
-
-**Invalid**: `02-08-20` Wrong order of year, month and date.
-
-**Invalid**: `2nd August 2020` You cannot use text to enter dates.
-
-### Time Terms
-
-Times should be entered in 24 hour format, in the order `HH:MM:SS`.
-
-Term | Meaning | Example
------|-------- | -------
-HH   | Hour    | `16`
-MM   | Minute  | `52`
-SS   | Second  | `03`
-
-**Valid**: `15:08:02`
-
-**Invalid**: `15:8:2` Wrong number of digits.
-
-**Invalid**: `8:15:2` Wrong order of hour, minute and second.
-
-**Invalid**: `03:08:02PM` Only 24 hour time is accepted.
-
-### Combining Date and Time
-
-You may also have to enter both dates and times together. When entered together, dates and times should be entered in the order `YYYY-MM-DDTHH:MM:SS`. The letter `T` separates the date and time.
-
-**Valid**: `2020-08-02T15:08:02`
-
-**Invalid**: `15:08:02T2020-08-02` Wrong order of date and time.
-
-## `ID` Term
-
-* You need to enter an id which refers to the id number shown in the displayed project/task list.
-
-* You need to enter a **positive integer** such as 1, 2, 3, …​
+By default, the theme of Momentum is set to Dark. If you want to adjust the theme, you can do so by changing it in the application [settings](#settings).
 
 ## Features<a name="2-Features"></a>
-
 ### Projects and Tasks<a name="3-Projects-and-Tasks"></a>
 
 Done by: Farrell Nah Jun Hao
 
-You can add projects into Momentum to be tracked. Each project has the following information:
+You can add projects into Momentum to be tracked. Each project can have the following information:
 
 * Name
 * Description
@@ -217,8 +237,7 @@ Apart from the name, all other information is optional.
 
 Each project can also contain several tasks, each with the same information as a project.
 
-When you first open Momentum, you will see all the projects being tracked in Momentum. You can then view the tasks
- for each project separately. seperately using the [view command](#viewing-a-projects-tasks-view)]
+When you first open Momentum, you will see all the projects being tracked in Momentum. You can then view the tasks for each project separately using the [view command](#viewing-a-projects-tasks-view)]
 
 <div markdown="block" class="alert alert-info">
 
@@ -236,20 +255,22 @@ View the tasks for a project.
 
 Format: `view ID`
 
-* You can refer to [`ID` Term](#id-term) for more information.
+* You can refer to [Index Term](#index-term) for more information.
 
 Example: `view 1`
 
-##### Walkthrough of viewing a project's tasks
-Suppose you would like to view the tasks belonging to the 2nd project in the list
+
+The following walkthrough shows how you can use the view command to go from project view to task view.
+
+Suppose you would like to view the tasks belonging to the 2nd project in the list.
 
 ![View1](images/View1.png)
 
-1. Type `view 1` into the command box and press <kbd>Enter</kbd>
+1. Type `view 1` into the command box and press <kbd>Enter</kbd>.
 
     ![View2](images/View2.png)
 
-2. The results box will display a message to indicate that you have successfully changed your view. You should see the tasks belonging to the project in the display list.
+2. The results box will display a message to indicate that you have successfully changed your view. You should see the tasks belonging to the project in the displayed list.
 
     ![View3](images/View3.png)
     
@@ -262,19 +283,17 @@ This is the default view you will see when Momentum is first opened.
 
 Format: `home`
 
-##### Walkthrough of viewing projects
-Suppose you are in task view, and would like to go to project view.
+The following walkthrough shows how you can use the home command to go from task view to project view.
 
 ![Home0](images/Home0.png)
 
-1. Type `home` into the command box and press <kbd>Enter</kbd>
+1. Type `home` into the command box and press <kbd>Enter</kbd>.
 
     ![Home1](images/Home1.png)
 
-2. The results box will display a message to indicate that you have successfully changed your view. You should see the tasks belonging to the project in the display list.
+2. The results box will display a message to indicate that you have successfully changed your view. You should see the tasks belonging to the project in the displayed list.
 
     ![Home2](images/Home2.png)
-
 
 #### Creating a Project/Task: `add`
 
@@ -286,17 +305,11 @@ Format: `add n/NAME [d/DESCRIPTION] [c/] [dd/DEADLINE_DATE [dt/DEADLINE_TIME]] [
 
 * `n/NAME`
 
-  * You can enter alphanumeric characters (a-Z, 0-9) and spaces for names. <br>
+  * You can enter alphanumeric characters (a-Z, 0-9) and spaces for names. <br><br>
 
 * `[d/DESCRIPTION]`
 
   * You can enter any character for descriptions.
-
-  <div markdown="block" class="alert alert-info">
-
-  :bulb: You can enter an empty description.
-
-  </div>
 
 * `[c/]`
 
@@ -326,44 +339,34 @@ Format: `add n/NAME [d/DESCRIPTION] [c/] [dd/DEADLINE_DATE [dt/DEADLINE_TIME]] [
 
   * You need to enter date and time of the reminder using YYYY-MM-DDTHH:MM:SS format. (refer to [Date and Time Terms](#Date-and-Time-Terms) for more information on YYYY, MM, DD, HH, MM, and SS)
 
-  <div markdown="block" class="alert alert-info">
-
-  :bulb: `T` separates the date and time in a reminder.
-
-  </div>
-
   <div markdown="block" class="alert alert-danger">
 
-  :warning: You cannot enter a date and time earlier than the current date and time for reminders. (refer to [Reminders](#reminders) for more details on reminders)
+  :warning: You cannot enter a date and time earlier than the current date and time for reminders (refer to [Reminders](#reminders) for more details).
 
   </div>
 
 * `[t/TAG]`
 
   * Similar to names, you can enter alphanumeric characters (a-Z, 0-9) and spaces in tags.
+  
+  * You can enter any number of tags, including 0.
 
-  <div markdown="block" class="alert alert-info">
-
-  :bulb: You can enter any number of tags, including 0.
-
-  </div>
-
-Example: `add n/Momentum d/CS2103T Team Project dd/2021-12-07 dt/11:01:12 r/2021-12-07T11:01:12 t/impt`
-
-Result: Momentum will create a project/task named "Momentum", with description "CS2103T Team Project", deadline date "2020-10-07" as well as deadline time "11:01:12", reminder "2020-10-07T11:01:12", and tag "impt".
-
-##### Walkthrough of Creating a Project
+The following walkthrough shows how you can create a new project in Momentum.
 
 1. You can type `add n/Momentum d/CS2103T Team Project c/ dd/2021-12-07 dt/11:01:12 r/2021-12-07T11:01:12 t/impt` in the command box, and press the <kbd>Enter</kbd> key to execute it.
+
 ![Walkthrough of Creating a Project Diagram Step 1](images/AddProjectDiagram1.png)
 
 2. The result box will display a message to indicate that you executed the command successfully.
+
 ![Walkthrough of Creating a Project Diagram Step 2](images/AddProjectDiagram2.png)
 
 3. You added a project to the project list as shown below.
+
 ![Walkthrough of Creating a Project Diagram Step 3](images/AddProjectDiagram3.png)
 
 4. On 7 December 2021, at 11:01:12, the reminder panel will show the reminder you added and the reminder of the project will be removed.
+
 ![Walkthrough of Creating a Project Diagram Step 4](images/AddProjectDiagram4.png)
 
 #### Editing a Project/Task: `edit`
@@ -380,14 +383,14 @@ Format: `edit ID [n/NAME] [d/DESCRIPTION] [c/] [dd/DEADLINE_DATE [dt/DEADLINE_TI
 
 <div markdown="block" class="alert alert-info">
 
-:bulb: You can remove a description, deadline or reminder by typing `d/` or `dd/` or `r/` without specifying anything after it.
+:bulb: You can remove a description, a deadline or a reminder by typing `d/` or `dd/` or `r/` without specifying anything after it.
 
 </div>
 
 * `ID`
 
-  * You can refer to [`ID` Term](#id-term) for more information.
-
+  * You can refer to [Index Term](#index-term) for more information. <br>
+  
 * `n/NAME`
 
   * You can enter alphanumeric characters (a-Z, 0-9) and spaces for names.
@@ -404,7 +407,7 @@ Format: `edit ID [n/NAME] [d/DESCRIPTION] [c/] [dd/DEADLINE_DATE [dt/DEADLINE_TI
 
 * `[dd/DEADLINE_DATE [dt/DEADLINE_TIME]]`
 
-  * Note that `dt/DEADLINE_TIME` is an optional part of the the `dd/`, you cannot enter a deadline with time only.
+  * Note that `dt/DEADLINE_TIME` is an optional part of the the `dd/`. You cannot enter a deadline with time only.
 
   * You can enter a deadline with date only.
 
@@ -430,11 +433,7 @@ Format: `edit ID [n/NAME] [d/DESCRIPTION] [c/] [dd/DEADLINE_DATE [dt/DEADLINE_TI
 
   </div>
 
-Example: `edit 3 n/NewMomentum d/NewDescription dd/2021-12-07 t/normal`
-
-Result: Momentum will edit the third project/task. The name will be changed to "NewMomentum", the description will be changed to "NewDescription", the deadline will be changed to "2021-12-07", all the tags will be removed and a tag named normal will be added.
-
-##### Walkthrough of Editing a Task
+The following walkthrough shows how you can edit a task in Momentum.
 
 1. In task view, you can type `edit 3 n/NewMomentum d/NewDescription dd/2021-12-07 r/ t/normal` in the command box, and press the <kbd>Enter</kbd> key to execute it.
 ![Walkthrough of Editing a Task Diagram Step 1](images/EditTaskDiagram1.png)
@@ -469,7 +468,7 @@ Suppose you would like to delete the first project in the list
 
     ![Delete2](images/Delete2.png)
     
-2. The results box will display a message to indicate that the project has been successfully deleted. You should no long see the project in the display list.
+2. The results box will display a message to indicate that the project has been successfully deleted. You should no long see the project in the displayed list.
 
     ![Delete3](images/Delete3.png)
 
@@ -499,7 +498,7 @@ Suppose you ahd previously executed a [find command]() and would like to see all
 
     ![List2](images/List2.png)
     
-2. The results box will display a message to indicate that all your projects are being displayed. You should see that all your projects are being displayed in the display list.
+2. The results box will display a message to indicate that all your projects are being displayed. You should see that all your projects are being displayed in the displayed list.
 
     ![List3](images/List3.png)
 
@@ -507,11 +506,11 @@ Suppose you ahd previously executed a [find command]() and would like to see all
 
 Done by Kang Su Min
 
-Sorts the list of displayed projects or tasks in the application.
+This command allows you to sort the list of displayed projects or tasks in a particular sort type and order.
 
 Format: `sort [type/SORT_TYPE] [order/SORT_ORDER] [c/]`
 
-* There are 3 types of sort.
+* There are 3 sort types.
   * `type/alpha` will sort the list of projects in alphabetical order.
   * `type/deadline` will sort the list of projects according to their deadlines.
   * `type/created` will sort the list of projects according to their date of creation.
@@ -520,20 +519,19 @@ Format: `sort [type/SORT_TYPE] [order/SORT_ORDER] [c/]`
   * `order/asc` will sort the list of projects in ascending order.
   * `order/dsc` will sort the list of projects in descending order.
 
-* The projects can be sorted by completion status.
-    * This is the default sort, and is also the "dominant sort" that will ensure that all incomplete projects/tasks will be ordered before complete projects/tasks when completion status order is on.
-    Within incomplete and complete projects/tasks, they will be ordered by specified order (alphabetical/deadline/created date, ascending/descending).
-    * Run `sort c/` to toggle the default completion status sort.
+In addition to the above sort types and orders, the list can be sorted by completion status.
+* This is the "dominant sort" that will ensure that all incomplete projects/tasks are above complete projects/tasks, before sorting the projects/tasks in the specified sort type and order above.
+* The default sort order will sort the projects/tasks by completion status.
+* `sort c/` will toggle the default completion status sort.
+    * Once the completion status sort is off, the projects/tasks will be sorted in the specified sort type and order without regard for their completion status.
 
 <div markdown="block" class="alert alert-primary">
 
-:bulb: **Tip:**
-
+:bulb: 
+* When the application first starts, the completion status order is on. This completion status sort status (on/off) is maintained until it is toggled.
 * `type/alpha` and `order/asc` will be used as default if both sort type and order are not specified (i.e. command is `sort`)
-* Current sort type will be used if the `type` is not specified but `order` is specified.
-* `order/asc` will be used as default if the `order` is not specified but `type` is specified.
-* For `sort type/deadline`, projects without deadlines will be ordered alphabetically after the ordered list of projects with deadlines.
-* For both `sort type/deadline` and `sort type/created`, projects with same deadline or same created date will be sorted alphabetically.
+* For both `sort type/deadline` and `sort type/created`, projects with the same deadline or same created date will be sorted in alphabetical order.
+* For `sort type/deadline`, projects/tasks with deadlines will appear at the top of the list sorted in deadline order, while those without deadlines will be pushed to the end of the list sorted in alphabetical order
 
 </div>
 
@@ -541,47 +539,47 @@ Format: `sort [type/SORT_TYPE] [order/SORT_ORDER] [c/]`
 
 Format: `sort`
 
-* Sorts projects in alphabetical, ascending order
+This sorts projects in default ascending alphabetical order.
 
-The following walkthrough shows how a user can sort projects in Momentum by the default order
+The following walkthrough shows how you can sort projects in Momentum by the default order.
 
-1. Key in command `sort` in the command window.
+1. Key in command `sort` in the command window then press <kbd>Enter</kbd>.
 ![Default Sort Step 1](images/DefaultSort1.png)
 2. The result box will display a message to indicate that the command has been executed successfully:
 ![Default Sort Step 2](images/DefaultSort2.png)
-3. All projects are ordered in default ascending alphabetical order with incomplete tasks showing up at the top of the list.
+3. All projects are ordered in default ascending alphabetical order with incomplete tasks showing up at the top of the list (Completion status sort is on).
 ![Default Sort Step 3](images/DefaultSort3.png)
 
 ##### Sorting With Completion Status Toggle
 
-* Toggles the completion status order i.e. if the completion status order is "on" with incomplete projects/tasks showing up at the top of the list, the completion status order is turned "off", which sorts the projects/tasks in the specified order without regard for its completion status.
-
 Format: `sort c/`
 
-This toggles the completion status order and then sorts projects in default alphabetical, ascending order.
+This toggles the completion status order i.e. if the completion status order is "on", the completion status order is turned "off", vice versa.
 
-The following walkthrough shows how a user can sort projects in Momentum by toggling the completion status order.
+The following walkthrough shows how you can toggle the completion status order in Momentum.
 
-1. Key in command `sort c/` in the command window.
+1. Key in command `sort c/` in the command window then press <kbd>Enter</kbd>.
 ![Toggle Completion Status Step 1](images/ToggleCompletionStatus1.png)
+Note that currently all projects at the top of the list are incomplete tasks.
 2. The result box will display a message to indicate that the command has been executed successfully:
 ![Toggle Completion Status Step 2](images/ToggleCompletionStatus2.png)
-3. All projects are ordered in default ascending alphabetical order without regard for completion status.
+3. All projects are ordered in default ascending alphabetical order without regard for their completion status.
 ![Toggle Completion Status Step 3](images/ToggleCompletionStatus3.png)
 
 ##### Sorting with Only Type Specified
 
-Format: `sort type/SORT_TYPE`
+`order/asc` is assumed if the `order` is not specified.
+Hence, this sorts projects by the specified sort type, in ascending order.
 
-* Sorts projects in a specified order
-* Since order is not specified, default order is ascending
+Format: `sort type/SORT_TYPE`
 
 Example: `sort type/deadline`
 
-The following walkthrough shows how a user can sort projects in Momentum by specifying only the sort type.
+The following walkthrough shows how you can sort projects in Momentum by specifying only the sort type.
 
-1. Key in command `sort type/deadline` in the command window.
+1. Key in command `sort type/deadline` in the command window then press <kbd>Enter</kbd>.
 ![Deadline Sort 1](images/DeadlineSort1.png)
+Note that the projects are not sorted in asceding deadline order.
 2. The result box will display a message to indicate that the command has been executed successfully:
 ![Deadline Sort 2](images/DeadlineSort2.png)
 3. All projects are ordered in ascending deadline order.
@@ -589,49 +587,49 @@ The following walkthrough shows how a user can sort projects in Momentum by spec
 
 ##### Sorting With Only Order Specified
 
-Format: `sort order/SORT_ORDER`
+The current sort type is assumed if the `type` is not specified.
+If there is no existing project order (when the application restarts), order will be alphabetical by default.
 
-* Sorts projects in specified sort order, according to current sort type.
-* If there is no existing project order (when the application restarts), order will be alphabetical by default.
+Format: `sort order/SORT_ORDER`
 
 Example: `sort order/dsc`
 
-The following walkthrough shows how a user can sort projects in Momentum by specifying only the sort order.
+The following walkthrough shows how you can sort projects in Momentum by specifying only the sort order.
 
-1. Key in command `sort order/dsc` in the command window.
+1. Key in command `sort order/dsc` in the command window then press <kbd>Enter</kbd>.
 ![Deadline Sort Descending 1](images/DeadlineDescending1.png)
+Note that currently the projects are sorted in ascending deadline order.
 2. The result box will display a message to indicate that the command has been executed successfully:
 ![Deadline Sort Descending 2](images/DeadlineDescending2.png)
-3. All projects are ordered in descending deadline order (Projects were ordered by deadline previously).
+3. All projects are ordered in descending deadline order.
 ![Deadline Sort Descending 3](images/DeadlineDescending3.png)
 
 ##### Sorting With Both Type and Order Specified
 
-* Sorts projects in specified type and order.
+This sorts projects in the specified type and order.
 
 Example: `sort type/created order/dsc`
 
-The following walkthrough shows how a user can sort projects in Momentum by specifying both sort type and order.
+The following walkthrough shows how you can sort projects in Momentum by specifying both sort type and order.
 
-1. Key in command `sort type/created order/dsc` in the command window.
+1. Key in command `sort type/created order/dsc` in the command window then press <kbd>Enter</kbd>.
 ![Created Descending 1](images/CreatedDescending1.png)
+Note that the projects are not sorted by descending created date order.
 2. The result box will display a message to indicate that the command has been executed successfully:
 ![Created Descending 2](images/CreatedDescending2.png)
 3. All projects are ordered in descending created date order.
 ![Created Descending 3](images/CreatedDescending3.png)
+Note that for projects with the same created date, they are sorted in descending alphabetical order.
 
 #### Filtering Projects: `find`
 
 Done by Balasubramaniam Praveen
 
-Searches for projects or tasks in the project book based on certain parameters.
+Momentum allows you to make detailed searches for projects or tasks based on a combination of their name, description, tags and completion status. This is done using the find command.
 
 Format: `find [match/FILTER_TYPE] [n/NAME [MORE_NAMES]...] [d/DESCRIPTION [MORE_DESCRIPTIONS]...] [t/TAG [MORE_TAGS]...] [c/COMPLETION_STATUS]`
 
-* There are three values for the `match` parameter.
-    * `match/all` shows an entry only if **all** of the parameters provided in the user's input matches the entry.
-    * `match/any` shows an entry as long as **any** of the parameters provided in the user's input matches the entry.
-    * `match/none` shows an entry only if **none** of the parameters provided in the user's input matches the entry.
+Let us now take a look at how to make simple searches using the find command. Advanced searches that utilize the match parameter will be discussed later. 
 
 <div markdown="block" class="alert alert-info">
 
@@ -643,15 +641,15 @@ You can only search for projects in the project view and tasks in the tasks view
 <div markdown="block" class="alert alert-info">
 
 :bulb: **Tip:**
-`match/any` will be used if the `match` type is not specified.
+Search parameters are not case sensitive.
 
 </div>
 
 <div markdown="block" class="alert alert-info">
 
 :bulb: **Tip:**
-Search parameters are not case sensitive.
-
+The projects/tasks in Momentum will no longer be filtered after the `Add`, `View` or `Home` Commands are used.
+They will continue to be filtered after the `Edit` and `Delete` Commands are used.
 </div>
 
 ##### Searching by Name
@@ -659,7 +657,7 @@ Search parameters are not case sensitive.
 * The `n/` command checks whether a project has a certain name. There can be multiple names added to this command. For example, `n/car window` will check for the projects that contain `car` or `window` in their names.
 * Searching by name only requires a partial match. This means that a project with the name `carpet` and `car` can potentially be the result of searching for the term `car`.
 
-The following walkthrough shows how a user can use the find command to search for projects with the `ad` in their names.
+The following walkthrough shows how you can use the find command to search for projects with `ad` in their names.
 
 1. Key in the command `find n/ad` in the command window.
 ![Find by Name Step 1](images/FindByName1.png)
@@ -673,14 +671,14 @@ The following walkthrough shows how a user can use the find command to search fo
 * The `d/` command checks whether a project has a certain description. There can be multiple descriptions added to this command. For example, `d/sunday october` will check for the projects that contain `sunday` or `october` in their description.
 * Searching by description only requires a partial match, similar to searching by name.
 
-The following walkthrough shows how a user can use the find command to search for projects with the `discussion` in their description.
+The following walkthrough shows how you can use the find command to search for projects with `discussion` in their description.
 
 1. Key in the command `find d/discussion` in the command window.
-![Find by Description Step 1](images/FindByDescription1.png)
+![Find by Description Step 1](images/FindByDesc1.png)
 2. The result box will display a message to indicate that the command has been executed successfully:
-![Find by Description Step 2](images/FindByDescription2.png)
+![Find by Description Step 2](images/FindByDesc2.png)
 3. All projects that contain `discussion` in their description will be shown.
-![Find by Description Step 3](images/FindByDescription3.png)
+![Find by Description Step 3](images/FindByDesc3.png)
 
 ##### Searching by Tag
 
@@ -694,7 +692,7 @@ Searches for tags require a full match whilst partial matches are sufficient for
 
 </div>
 
-The following walkthrough shows how a user can use the find command to search for projects with the tag `webdesign`.
+The following walkthrough shows how you can use the find command to search for projects with the tag `webdesign`.
 
 1. Key in the command `find t/webdesign` in the command window.
 ![Find by Tag Step 1](images/FindByTag1.png)
@@ -709,7 +707,7 @@ The following walkthrough shows how a user can use the find command to search fo
 * The `c/` command checks whether a project is completed. For example, `c/completed` will check for the projects that are completed.
 * When `c/` is not specified, both complete and incomplete projects will be shown.
 
-The following walkthrough shows how a user can use the find command to search for projects that have been completed.
+The following walkthrough shows how you can use the find command to search for projects that have been completed.
 
 1. Key in the command `find c/completed` in the command window.
 ![Find by Completion Step 1](images/FindByCompletion1.png)
@@ -718,34 +716,45 @@ The following walkthrough shows how a user can use the find command to search fo
 3. All projects that are completed will be shown.
 ![Find by Completion Step 3](images/FindByCompletion3.png)
 
-##### Searching with Multiple Parameters
+##### Searching by Multiple Keywords
 
-You can search for projects/tasks with multiple keywords for names, descriptions and tags in a single search.
+You can search for projects or tasks with multiple keywords for names, descriptions and tags in a single search.
 
-A match type can also be specified as mentioned at the [start of this section](#filtering-projects-find).
+To do this, you can add all the keywords that you would like to search for in the command. For example, if you would like to
+search for projects or tasks that contain either `discussion` or `drawing` in their descriptions, you can do so by searching using
+the command `find d/discussion drawing`.
 
-Please look at the examples below to get a better understanding of how you can make searches with multiple parameters.
+In this command, each keyword to search for is separated by a whitespace.
 
-Examples:
+The following walkthrough shows you can use the find command to search for projects with `discussion` or `drawing` in their description.
 
-Let's say that you have the following projects in Momentum:
+1. Key in the command `find d/discussion drawing` in the command window.
+![Find by Multiple Keywords Step 1](images/FindByMultipleKeywords1.png)
+2. The result box will display a message to indicate that the command has been executed successfully:
+![Find by Multiple Keywords Step 2](images/FindByMultipleKeywords2.png)
+3. All projects that contain `discussion` or `drawing` in their description will be shown.
+![Find by Multiple Keywords Step 3](images/FindByMultipleKeywords3.png)
 
-1. Name: `Create Logo` , Description: `Make logo for startup XYZ`, Tags: `Design`
-2. Name: `Write Song`, Description: `80s rock music, three minutes`, Tags: `Music`
-3. Name: `Write Article`, Description: `Write an article about why Momentum is the best app out there`, Tags: `Press` and `Writing`
+You can use the same method to search for projects using multiple keywords for name or tags. However, this will not work with completion status. You can only search by one completion status. 
 
-* `find match/any n/song article d/startup t/design` will return all three projects. This is because project 1 contains the keyword `startup` in its description and the tag `design`, project 2 contains the keyword `song` in its name and project 3 contains the keyword `article` in its name.
+##### Searching by Multiple Parameters
 
-* `find match/all n/song article d/startup t/design` will not return any project as there is no project with `song` **and** `article` in its name **and** `startup` in its description and the tag `design`.
+So far, you have learnt how to search for projects that contain multiple keywords for a single parameter. But what if you want to search for projects by multiple parameters instead? 
 
-* `find match/none n/song article d/startup t/design` will not return any project as there is no project that **does not** contain `song` and `article` in its name, `startup` in its description and the tag `design`.
+Momentum makes it extremely easy for you to do that. 
 
-* `find match/any n/write d/rock` will return projects 2 and 3. This is because project 2 contains `write` in its name and `rock` in its description. Project 3 also contains the word `write` in its name.
+To make such a search, all you need to do is add all the parameters you would like to search for in a single find command. You can think of this as combining mulitple find commands together. For example, if you would like to search for projects or tasks that contain either `certification` in their name or `discussion` in their description, you can do so by searching using the command `find n/certification d/discussion`.
 
-* `find match/all n/write d/rock` will only return project 2. This is because project 2 is the only project that contains both `write` in its name **and** `rock` in its description.
+The following walkthrough shows you can use the find command to search for projects that contain either `certification` in their names or `discussion` in their description.
 
-* `find match/none n/write d/rock` will return project 1. This is because only project 1 **does not** contain
- `write` in its name and `rock` in its descriptions.
+1. Key in the command `find n/certification d/discussion` in the command window.
+![Find by Multiple Parameters Step 1](images/FindByMultipleParameters1.png)
+2. The result box will display a message to indicate that the command has been executed successfully:
+![Find by Multiple Parameters Step 2](images/FindByMultipleParameters2.png)
+3. All projects that contain `certification` in their name or `discussion` in their description will be shown.
+![Find by Multiple Parameters Step 3](images/FindByMultipleParameters3.png)
+
+You can use the same method to search for projects by a combination of other parameters as well. You can also use multiple keywords for each parameter that allows for it as mentioned in the previous section. 
 
 <div markdown="block" class="alert alert-info">
 
@@ -755,12 +764,63 @@ If a certain search type is used more than once, the latest entry will be used.
 
 </div>
 
+##### Adding Match Type to Searches
+
+So far, you have learnt how to make searches by multiple keywords and parameters. However, the searches shown so far show a project as long as there is any one keyword that matches it. But this might not be useful in some cases. What if you need to search for a project that matches all keywords, or does not match any of the keywords entered.
+
+This is where match type comes in. Match type can be added to your find command in addition to the parameters you are searching by. 
+
+There are three values for the `match` parameter.
+  * `match/all` shows an entry only if **all** of the keywords and parameters provided in the user's input matches the entry.
+  * `match/any` shows an entry as long as **any** of the keywords and parameters provided in the user's input matches the entry.
+  * `match/none` shows an entry only if **none** of the keywords and parameters provided in the user's input matches the entry.
+
 <div markdown="block" class="alert alert-info">
 
 :bulb: **Tip:**
-The projects/tasks in Momentum will no longer be filtered after the `Add`, `View` or `Home` Commands are used.
-They will continue to be filtered after the `Edit` and `Delete` Commands are used.
+`match/any` will be used if the `match` type is not specified.
+
 </div>
+
+This might be a little confusing, so let's dive right into an example. We'll look at the example `find n/ad d/discussion t/artcomm` and compare how match type affects the results displayed.
+
+Let's first look at `match/any`. This match type shows an entry as long as any keyword matches the user's input. It is also the default behaviour of the find command. The following walkthrough shows how to use `match/any`. 
+
+1. Key in the command `find n/ad d/discussion t/artcomm match/any` in the command window.
+![Match Any Step 1](images/MatchAny1.png)
+2. The result box will display a message to indicate that the command has been executed successfully:
+![Match Any Step 2](images/MatchAny2.png)
+3. All projects that contain `ad` in their name or `discussion` in their description or the tag `artcomm` will be shown.
+![Match Any Step 3](images/MatchAny3.png)
+
+As seen in the example above, an entry is shown as long as any one of the keywords matches the project. 
+
+Let's now look at `match/all`. This match type shows an entry only if all keywords matches the user's input. The following walkthrough shows how to use `match/all`. 
+
+1. Key in the command `find n/ad d/discussion t/artcomm match/all` in the command window.
+![Match All Step 1](images/MatchAll1.png)
+2. The result box will display a message to indicate that the command has been executed successfully:
+![Match All Step 2](images/MatchAll2.png)
+3. All projects that contain `ad` in their name and `discussion` in their description and the tag `artcomm` will be shown.
+![Match All Step 3](images/MatchAll3.png)
+
+As seen in the example above, an entry is only shown if all keywords matches the project. 
+
+Finally, let's look at `match/none`. This match type shows an entry only if none of the keywords matches the user's input. The following walkthrough shows how to use `match/none`. 
+
+1. Key in the command `find n/ad d/discussion t/artcomm match/none` in the command window.
+![Match None Step 1](images/MatchAll1.png)
+2. The result box will display a message to indicate that the command has been executed successfully:
+![Match None Step 2](images/MatchAll2.png)
+3. All projects that do not contain `ad` in their name, `discussion` in their description and the tag `artcomm` will be shown.
+![Match None Step 3](images/MatchAll3.png)
+
+As seen in the example above, an entry is only shown if none of the keywords matches the project. 
+
+The posibilities of using match type to enhance your searches is limitless. Here are some examples where `match/all` and `match/none` may come in handy.
+
+1. If you have many projects and want to find a specific project, you can use `match/all` to narrow down your search results.
+2. If you have many projects and want to find projects that are not part of a certain category, you can use `match/none` to narrrow down your search results.
 
 ### Time Tracking
 
@@ -794,7 +854,7 @@ You can run timers for a project separately from its tasks. This allows you to t
 
 Example: `start 2`
 
-Result: Starts a timer for the second project or task in the display list.
+Result: Starts a timer for the second project or task in the displayed list.
 
 #### Stopping a Timer for a Project: `stop`
 
@@ -806,7 +866,7 @@ Format: `stop ID`
 
 Example: `stop 2`
 
-Result: Stops the timer for the second project or task in the display list.
+Result: Stops the timer for the second project or task in the displayed list.
 
 #### Active Timers Panel
 
@@ -884,25 +944,26 @@ Done by Cheong Ying Yi Clara
 
 Done By Kang Su Min
 
-Undo command undoes previous command and redo command redoes previously undone command.
+The undo/redo feature can be thought of as a "history traversal" function. After the execution of every command (excluding `help` and `exit`), all data at that point in time is stored in your Momentum history log.
+The undo and redo command allows you to traverse up or down this history log such that you can recover any data that has been stored in your Momentum history at any point in time.  
 
 #### Undoing the Previous Command: `undo`
 
-The undo command resets the application to the state before previous command was executed.
+The undo command undoes the last command that was executed. You can recover all data before the last command was executed.
 
 Format: `undo`
 
 Example: `start 1`, `undo`
 
-Result: Timer for project/task at index 1 is started, then stopped and removed after undo is executed.
+Result: Timer for project/task at index 1 is started, then stopped and removed after `undo` is executed.
 
 The following walkthrough shows how a user can start a timer for a project, then undo the command.
 
-1. Key in command `start 1` in the command window.
+1. Key in command `start 1` in the command window then press <kbd>Enter</kbd>.
 ![Undo 1](images/Undo1.png)
 2. The result box will display a message to indicate that the command has been executed successfully, and the timer for that project will appear at the side panel.
 ![Undo 2](images/Undo2.png)
-3. Key in command `undo` in the command window.
+3. Key in command `undo` in the command window then press <kbd>Enter</kbd>.
 ![Undo 3](images/Undo3.png)
 4. The result box will display a message to indicate that the command has been undone successfully.
 ![Undo 4](images/Undo4.png)
@@ -911,36 +972,36 @@ The following walkthrough shows how a user can start a timer for a project, then
 
 #### Redoing the Previous Command: `redo`
 
-The redo command redoes previously undone command and resets the application to the state before the previous undo command.
+The redo command redoes the last command that was previously undone. You can recover all data before the last `undo` command was executed.
 
 Format: `redo`
 
 Example: `sort type/deadline`, `undo`, `redo`
 
-Result: Projects are sorted by deadline, then the application is reset to the sorting order before sort command was executed, then reset back to sort by deadline after redo command.
+Result: Projects are first sorted by deadline, then the application is reset to the sorting order before sort command was executed when `undo` command is executed, then reset back to sort by deadline after `redo` command.
 
 The following walkthrough shows how a user can start a timer for a project, then undo the command.
 
-1. Key in command `sort type/deadline` in the command window.
+1. Key in command `sort type/deadline` in the command window then press <kbd>Enter</kbd>.
 ![Redo 1](images/Redo1.png)
-2. The result box will display a message to indicate that the command has been executed successfully. Projects have been sorted in ascending deadline order (Completion Status: On).
+Note: The projects are currently sorted in alphabetical, ascending order (default order).
+2. The result box will display a message to indicate that the command has been executed successfully. Projects are now sorted in ascending deadline order.
 ![Redo 2](images/Redo2.png)
-3. Key in command `undo` in the command window.
+3. Key in command `undo` in the command window then press <kbd>Enter</kbd>.
 ![Redo 3](images/Redo3.png)
-4. The result box will display a message to indicate that the command has been undone successfully. Projects have been reverted to their original order before the last sort command was executed.
+4. The result box will display a message to indicate that the command has been undone successfully. Projects are now sorted in their original order (alphabetical, ascending).
 ![Redo 4](images/Redo4.png)
-5. Key in command `redo` in the command window.
+5. Key in command `redo` in the command window then press <kbd>Enter</kbd>.
 ![Redo 5](images/Redo5.png)
 6. The result box will display a message to indicate that the command has been redone successfully.
 ![Redo 6](images/Redo6.png)
-7. Projects are again sorted in ascending deadline order (Completion Status: On).
+7. Projects are again sorted in ascending deadline order.
 ![Redo 7](images/Redo7.png)
 
 <div markdown="block" class="alert alert-primary">
 
-:bulb: **Tip:**
-
-* Undo/redo feature keeps track of changes in state, and hence will not work on `help` command which does not change the state of the application.
+:bulb:
+* Undo/redo feature keeps track of changes in data, and hence will not work on `help` or `exit` command which do not change the data in the application.
 * Redo command only works if the previous command is `undo`.
 
 </div>
@@ -957,11 +1018,11 @@ Momentum uses the data collected from your timers (see [time tracking](#time-tra
 ![StatisticsUI1](images/StatsUI1.png)
 Figure X: Location of the statistics panel
 
-The statistics displayed correspond to the projects or tasks currently shown in the display list, and will automatically
- change when the items in the display list changes (such as when you find specific projects or sort the list of projects).
+The statistics displayed correspond to the projects or tasks currently shown in the displayed list, and will automatically
+ change when the items in the displayed list changes (such as when you find specific projects or sort the list of projects).
 
 ![StatisticsUI2](images/StatsUI2.png)
-Figure X: The order of the statistics entries matches the order in the display list.
+Figure X: The order of the statistics entries matches the order in the displayed list.
 
 You do not need to use any additional commands to update or view the statistics.
 
@@ -1055,7 +1116,7 @@ Suppose that you would like to clear all the projects in Momentum.
     
     ![ClearProject1](images/ClearProject1.png)
 
-3. The result box will display a message to indicate that all projects have been cleared. You should no long see any projects in the display list.
+3. The result box will display a message to indicate that all projects have been cleared. You should no long see any projects in the displayed list.
 
     ![ClearProject2](images/ClearProject2.png)
 
