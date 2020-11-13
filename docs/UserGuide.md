@@ -286,7 +286,7 @@ Format: `add n/NAME [d/DESCRIPTION] [c/] [dd/DEADLINE_DATE [dt/DEADLINE_TIME]] [
 
 * `n/NAME`
 
-  * You can enter alphanumeric characters (a-Z, 0-9) and spaces for names. <br>
+  * You can enter alphanumeric characters (a-Z, 0-9) and spaces for names. <br><br>
 
 * `[d/DESCRIPTION]`
 
