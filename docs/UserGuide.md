@@ -390,14 +390,14 @@ Format: `edit ID [n/NAME] [d/DESCRIPTION] [c/] [dd/DEADLINE_DATE [dt/DEADLINE_TI
 * `ID`
 
   * You can refer to [Index Term](#index-term) for more information. <br>
-
+  
 * `n/NAME`
 
-  * You can enter alphanumeric characters (a-Z, 0-9) and spaces for names. <br>
+  * You can enter alphanumeric characters (a-Z, 0-9) and spaces for names.
 
 * `[d/DESCRIPTION]`
 
-  * You can enter any character for descriptions. <br>
+  * You can enter any character for descriptions.
 
 * `[c/]`
 
